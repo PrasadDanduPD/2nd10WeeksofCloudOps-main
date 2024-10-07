@@ -19,16 +19,18 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/CloudTechDevOps/2nd10WeeksofCloudOps-main.git'
+                git branch: 'main', url: 'https://github.com/PrasadDanduPD/2nd10WeeksofCloudOps-main.git'
             }
         }
         stage('Sonarqube Analysis') {
             steps {
                 dir('backend') {
                     withSonarQubeEnv('sonar-server') {
-                        sh ''' $SCANNER_HOME/bin/sonar-scanner \
-                        -Dsonar.projectName=three-tier-backend \
-                        -Dsonar.projectKey=three-tier-backend '''
+                        sh ''' sonar-scanner \
+  -Dsonar.projectKey=three-tier-backend \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://52.69.204.3:9000 \
+  -Dsonar.login=squ_856326e7ede364a7433169105d5a0a2720992791'''
                     }
                 }
             }
@@ -74,13 +76,13 @@ pipeline {
         }
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/CloudTechDevOps/2nd10WeeksofCloudOps-main.git'
+                git branch: 'main', url: 'https://github.com/PrasadDanduPD/2nd10WeeksofCloudOps-main.git'
             }
         }
         stage('Update Deployment file') {
             environment {
                 GIT_REPO_NAME = "2nd10WeeksofCloudOps-main"
-                GIT_USER_NAME = "CloudTechDevOps"
+                GIT_USER_NAME = "PrasadDanduPD"
             }
             steps {
                 dir('kubernetes-files') {
