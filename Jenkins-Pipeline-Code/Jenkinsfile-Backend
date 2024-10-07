@@ -26,7 +26,7 @@ pipeline {
             steps {
                 dir('backend') {
                     withSonarQubeEnv('sonar-server') {
-                        sh ''' sonar-scanner \
+                        sh '''
   -Dsonar.projectKey=three-tier-backend \
   -Dsonar.sources=. \
   -Dsonar.host.url=http://52.69.204.3:9000 \
